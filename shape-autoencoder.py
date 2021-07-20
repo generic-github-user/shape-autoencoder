@@ -88,3 +88,34 @@ def shape(dims=[], res=64):
     return canvas, meta
 
 show(shape()[0])
+
+
+# In[1698]:
+
+
+def symbol(c=None, res=64, dims=[], font=None):
+#     typehandler = {
+#         'int'
+#     }
+    if c is None:
+        cn = np.random.randint(0, 1000)
+        c = chr(cn)
+#         print(c,cn)
+    dims = U(dims, [res, res, 3])
+    canvas = np.full(dims, 255, dtype=int)
+    fonts = ['arial', 'calibri', 'bahnschrift']
+    max_size = min(dims[:2])//2
+    size = np.random.randint(max_size//4, max_size)
+    if not font:
+        font = ImageFont.truetype(random.choice(fonts), size)
+    color = np.random.randint(100, 230, [3], dtype=int)
+    img = Image.fromarray(canvas.astype(np.uint8))
+#     np.array(dims)//4
+    pos = np.random.randint(0, np.array(dims)[:2]-size)
+    ImageDraw.Draw(img).text(tuple(pos), c, tuple(color), font=font)
+    meta = {
+        'c': c
+    }
+    return np.array(img), meta
+
+show(symbol()[0])
