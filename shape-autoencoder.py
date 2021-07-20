@@ -236,3 +236,11 @@ model.compile(
 #     'mse'
 )
 model.summary()
+
+full_history = []
+
+
+# In[1754]:
+
+
+show(Layers.Lambda(lambda I: tf.image.resize(I, (32, 32), method='bilinear', antialias=False))(data[2:3])[0])
