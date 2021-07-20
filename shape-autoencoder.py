@@ -19,3 +19,13 @@ from PIL import Image, ImageFont, ImageDraw
 
 from ipywidgets import interact, interactive, fixed, interact_manual
 import ipywidgets as widgets
+
+
+# In[174]:
+
+
+def U(a, b, c=None):
+    if c is None:
+        c = len(b)
+    a = a + ([None] * (c - len(a)))
+    return [ai if ai else b[i] for i, ai in enumerate(a)]
