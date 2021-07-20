@@ -197,3 +197,31 @@ encoder_layers = [
 #     Layers.Dense(200, activation=activation),
 #     Layers.Dense(3, activation=activation),
 ]
+
+decoder_layers = [
+#     Layers.Dense(100, activation=activation),
+    Layers.Dense(8**2*4, activation=activation),
+    Layers.Reshape((8, 8, 4)),
+    Layers.UpSampling2D((2, 2), interpolation='bilinear'),
+#     Layers.Pooling ?
+    
+    Layers.Conv2DTranspose(32, 3, padding='same', activation='relu', dilation_rate=1, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    Layers.UpSampling2D((2, 2), interpolation='bilinear'),
+    
+    Layers.Conv2DTranspose(16, 3, padding='same', activation='relu', dilation_rate=1, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    Layers.UpSampling2D((2, 2), interpolation='bilinear'),
+    
+    Layers.Conv2DTranspose(8, 3, padding='same', activation='sigmoid', dilation_rate=1, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    Layers.UpSampling2D((2, 2), interpolation='bilinear'),
+    
+    Layers.Conv2DTranspose(3, 3, padding='same', activation='sigmoid', dilation_rate=1, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    Layers.Conv2D(3, 3, strides=stride, padding='same', activation=activation, data_format='channels_last'),
+    
+#     Layers.Conv2DTranspose(3, 10, (2, 2), padding='same', activation='relu', dilation_rate=1, data_format='channels_last'),
+#     Layers.Dense((20)**2*3),
+#     clip layer?
+]
