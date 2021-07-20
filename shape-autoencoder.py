@@ -119,3 +119,21 @@ def symbol(c=None, res=64, dims=[], font=None):
     return np.array(img), meta
 
 show(symbol()[0])
+
+
+# In[1489]:
+
+
+chr(14)
+
+
+# In[1786]:
+
+
+def gen_data(F=symbol, N=100):
+    return zip(*[F(res=128) for i in range(N)])
+data, metadata = gen_data()
+data = np.array(data)/255
+print(data.dtype, data.shape)
+show(data[0])
+# todo: record creation parameters
