@@ -51,3 +51,19 @@ def show(im=None, data=[], plot_func='imshow', style='fivethirtyeight', axis='of
     getattr(ax, plot_func)(*data, **kwargs)
     plt.axis(axis)
     return ax
+
+
+# In[1292]:
+
+
+def rectangle(dims=[None]*3):
+    dims = U(dims, [64, 64, 3])
+    bg = 255
+    rect = np.full(dims, bg, dtype=int)
+    size = 20
+    x = random.randint(0, dims[0]-size)
+    y = random.randint(0, dims[1]-size)
+    w = random.randint(5, size)
+    h = random.randint(5, size)
+    rect[x:x+w, y:y+h] = np.random.randint(100, 230, [3], dtype=int)
+    return rect
