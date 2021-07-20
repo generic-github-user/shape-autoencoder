@@ -67,3 +67,24 @@ def rectangle(dims=[None]*3):
     h = random.randint(5, size)
     rect[x:x+w, y:y+h] = np.random.randint(100, 230, [3], dtype=int)
     return rect
+
+show(rectangle([64,64]), figure={'figsize':[5,5]})
+
+
+# In[1792]:
+
+
+def shape(dims=[], res=64):
+    dims = U(dims, [res, res, 3])
+    canvas = np.full(dims, 255, dtype=int)
+    pos = np.random.randint([0, 0], canvas.shape[:2], [2])
+    grid = np.stack(np.meshgrid(*[np.arange(0, dim, 1) for dim in canvas.shape[:2]]), axis=2)
+    color = np.random.randint(100, 230, [3], dtype=int)
+    canvas[np.linalg.norm(pos - grid, axis=2, ord=np.random.randint(1, 5)) < 10] = color
+    meta = {
+        'pos': pos,
+        'color': color
+    }
+    return canvas, meta
+
+show(shape()[0])
