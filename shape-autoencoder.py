@@ -12,3 +12,10 @@ import matplotlib
 import random
 import PIL
 from PIL import Image, ImageFont, ImageDraw
+
+
+# In[871]:
+
+
+from ipywidgets import interact, interactive, fixed, interact_manual
+import ipywidgets as widgets
