@@ -225,3 +225,14 @@ decoder_layers = [
 #     Layers.Dense((20)**2*3),
 #     clip layer?
 ]
+
+model = tf.keras.models.Sequential(encoder_layers + decoder_layers)
+encoder = tf.keras.models.Sequential(encoder_layers)
+decoder = tf.keras.models.Sequential(decoder_layers)
+
+model.compile(
+    optimizer='adam',
+    loss=tf.keras.losses.MSE
+#     'mse'
+)
+model.summary()
