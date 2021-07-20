@@ -137,3 +137,29 @@ data = np.array(data)/255
 print(data.dtype, data.shape)
 show(data[0])
 # todo: record creation parameters
+
+
+# In[1746]:
+
+
+data.nbytes
+
+
+# In[1704]:
+
+
+metadata[5]
+
+
+# In[1787]:
+
+
+tf.keras.backend.clear_session()
+def dense_layers(sizes, A):
+    return [tf.keras.layers.Dense(s, activation=A) for s in sizes]
+Layers = tf.keras.layers
+activation = 'sigmoid'
+stride = (1, 1)
+batchnorm = {'center': 0.5}
+resolution = 128
+R = resolution
