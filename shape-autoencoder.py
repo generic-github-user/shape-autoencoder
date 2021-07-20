@@ -163,3 +163,37 @@ stride = (1, 1)
 batchnorm = {'center': 0.5}
 resolution = 128
 R = resolution
+encoder_layers = [
+    Layers.InputLayer(input_shape=(R, R, 3)),
+    Layers.Lambda(lambda I: tf.image.resize(I, (R//2, R//2), method='bilinear')),
+    
+    Layers.Conv2D(8, 3, strides=stride, padding='same', activation=activation, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    
+    Layers.Conv2D(16, 3, strides=stride, padding='same', activation=activation, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    
+    Layers.Conv2D(32, 3, strides=stride, padding='same', activation=activation, data_format='channels_last'),
+    Layers.MaxPooling2D((2, 2)),
+    Layers.Conv2D(32, 3, strides=stride, padding='same', activation=activation, data_format='channels_last'),
+#     very helpful at getting past the 'averaging' local minimum (where we get a white or light gray image that essentially averages the training data)
+    Layers.BatchNormalization(**batchnorm),
+    Layers.MaxPooling2D((2, 2)),
+    
+    Layers.Conv2D(32, 3, strides=stride, padding='same', activation=activation, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    Layers.MaxPooling2D((2, 2)),
+    
+    Layers.Conv2D(64, 3, strides=stride, padding='same', activation=activation, data_format='channels_last'),
+    Layers.BatchNormalization(**batchnorm),
+    Layers.MaxPooling2D((2, 2)),
+    
+#     tf.keras.preprocessing.image.smart_resize((20,20)),
+#     tf.keras.preprocessing.image.apply_affine_transform()
+#     tf.image
+    Layers.Flatten(),
+    *dense_layers([100, 50, 7], activation),
+#     Layers.Dense(400, activation=activation),
+#     Layers.Dense(200, activation=activation),
+#     Layers.Dense(3, activation=activation),
+]
