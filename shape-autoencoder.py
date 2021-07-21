@@ -276,3 +276,15 @@ show(full_history, plot_func='plot', axis='on')
 
 
 show(full_history[-100:], plot_func='plot')
+
+
+# In[1812]:
+
+
+i = np.random.randint(0,data.shape[0])
+sample = model(data[i:i+1])[0]
+print([[a, getattr(sample.numpy(), a)()] for a in ['min', 'max', 'mean']])
+show(sample)
+# show(data[i])
+# plt.scatter(marker=)
+matplotlib.markers
