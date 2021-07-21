@@ -310,3 +310,47 @@ def decode(*args, **kwargs):
     Z = list(kwargs.values())
     latent = np.expand_dims(np.array(Z), 0)
     show(decoder(latent)[0])
+
+
+# In[1574]:
+
+
+# [f'${c["c"]}$' for c in metadata]
+
+
+# In[1579]:
+
+
+# chr(0)
+chr(3227)
+
+
+# In[1660]:
+
+
+# 
+embeddings = np.array([encoder(data[i:i+1])[0] for i in range(0, data.shape[0])])
+
+
+# In[1674]:
+
+
+# ind = np.random.randint(0,embeddings.T.shape[0]-2)
+# np.random_sample()
+ind = np.random.choice(np.arange(embeddings.T.shape[0]), [5], replace=False)
+print(f'Displaying latent space embeddings for variables {ind[0]+1} (x) and {ind[1]+1} (y)')
+# print(f'Displaying latent space embeddings for variables '+)
+et = embeddings.T
+def rescale(a, n, m):
+    return np.interp(a, (a.min(), a.max()), (n, m))
+show(
+    plot_func='scatter',
+    data=et[ind[:2]],
+    c=et[ind[2]],
+    s=rescale(et[ind[3]], 5, 20),
+#     marker=[f'${c["c"]}$' for c in metadata],
+    alpha=rescale(et[ind[4]], 0.1, 1),
+    figure={'figsize':[10,10]}
+)
+# plt.scatter()
+# matplotlib.collections.Collection
