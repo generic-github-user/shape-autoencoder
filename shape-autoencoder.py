@@ -258,3 +258,21 @@ for l in model.layers:
     if len(p.shape)>=3:
         ims.append(p[0])
 show(ims[-1])
+
+
+# In[1806]:
+
+
+for e in range(20):
+    data, metadata = gen_data(shape)
+    data = np.array(data)/255
+    history = model.fit(data, data, epochs=10, verbose=2)
+    full_history.extend(history.history['loss'])
+
+show(full_history, plot_func='plot', axis='on')
+
+
+# In[1807]:
+
+
+show(full_history[-100:], plot_func='plot')
