@@ -288,3 +288,25 @@ show(sample)
 # show(data[i])
 # plt.scatter(marker=)
 matplotlib.markers
+
+
+# In[ ]:
+
+
+{3:5}.values()
+
+
+# In[1813]:
+
+
+ex = encoder(data[:1])
+print(ex)
+sliders = [widgets.FloatSlider(min=0, max=1, step=0.01, value=np.random.normal(ex.numpy().mean(),0.1)) for p in range(7)]
+inputs = {str(a): b for a, b in enumerate(sliders)}
+# print(inputs)
+@interact(**inputs)
+# np.random.normal(0, 1, [10])
+def decode(*args, **kwargs):
+    Z = list(kwargs.values())
+    latent = np.expand_dims(np.array(Z), 0)
+    show(decoder(latent)[0])
