@@ -244,3 +244,17 @@ full_history = []
 
 
 show(Layers.Lambda(lambda I: tf.image.resize(I, (32, 32), method='bilinear', antialias=False))(data[2:3])[0])
+
+
+# In[1755]:
+
+
+p = data[5:6]
+ims = []
+for l in model.layers:
+    p = l(p)
+    print(l, p.numpy().mean())
+    print('-'*20)
+    if len(p.shape)>=3:
+        ims.append(p[0])
+show(ims[-1])
