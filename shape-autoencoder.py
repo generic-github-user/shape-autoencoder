@@ -354,3 +354,47 @@ show(
 )
 # plt.scatter()
 # matplotlib.collections.Collection
+
+
+# In[1287]:
+
+
+et.T[ind[:2]].shape
+
+
+# In[1134]:
+
+
+embeddings.shape
+
+
+# In[618]:
+
+
+data.shape[0]
+
+
+# In[378]:
+
+
+((sample-data[i])**2).numpy().mean()
+
+
+# In[342]:
+
+
+show(model(data[:1])[0])
+
+
+# In[201]:
+
+
+model(data[:1])[0].shape
+# convolutional neural network art
+
+
+# In[ ]:
+
+
+
+
